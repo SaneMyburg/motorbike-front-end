@@ -34,7 +34,7 @@
 
 **[Motorbike front end]** is a react front end application that allow a user to book an appointment to try a motorcycle.
 
-[Link to Back-End Project](https://github.com/SaneMyburg/motorbike-front-end)
+[Link to Back-End Project](https://github.com/SaneMyburg/motorbike-back-end)
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -65,7 +65,6 @@
   </ul>
 </details>
 
-<!-- Features -->
 
 ### Key Features <a name="key-features"></a>
 
