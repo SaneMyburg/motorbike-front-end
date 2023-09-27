@@ -5,7 +5,6 @@ import Home from './components/Home';
 import './App.css';
 import Layout from './components/Layout';
 
-
 function App() {
   return (
     <Provider store={store}>
