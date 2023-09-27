@@ -1,9 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-
-const links = [
-  { path: '/', text: 'Motorbick' },
+const links = [{ path: '/', text: 'Motorbick' },
   { path: 'newpath', text: 'Reserve' },
   { path: 'newpath2', text: 'My reservations' },
   { path: 'newpath3', text: 'ADD Motorbick' },
