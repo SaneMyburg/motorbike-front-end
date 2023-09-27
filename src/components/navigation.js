@@ -1,11 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-const links = [{ path: '/', text: 'Motorbick' },
+const links = [{ path: '/', text: 'Motorbike' },
   { path: 'newpath', text: 'Reserve' },
   { path: 'newpath2', text: 'My reservations' },
-  { path: 'newpath3', text: 'ADD Motorbick' },
-  { path: 'newpath3', text: 'Delete Motorbick' },
+  { path: 'newpath3', text: 'ADD Motorbike' },
+  { path: 'newpath3', text: 'Delete Motorbike' },
 ];
 
 const NavigationPanel = () => (
