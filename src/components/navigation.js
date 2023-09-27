@@ -1,6 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { logout } from '../redux/users/userSlice';
 
 const links = [{ path: '/', text: 'Home' },
   { path: 'newpath2', text: 'My reservations' },
@@ -14,6 +15,10 @@ const authorizationLinks = [{ path: 'login', text: 'Log In' },
 
 const NavigationPanel = () => {
   const { user } = useSelector((state) => state.users);
+  const dispatch = useDispatch();
+  const handleSignOut = () => {
+    dispatch(logout());
+  };
   return (
 
     <>
@@ -23,15 +28,27 @@ const NavigationPanel = () => {
             <span className="fs-5 d-none d-sm-inline text-black">Logo</span>
           </button>
           {user ? (
-            <ul className="nav nav-pills flex-column mb-sm-auto mt-3 pt-3 mb-0 align-items-center align-items-sm-start" id="menu">
-              {links.map((link) => (
-                <li className="nav-item" key={link.text}>
-                  <NavLink to={link.path}>
-                    {link.text}
-                  </NavLink>
-                </li>
-              ))}
-            </ul>
+            <>
+              <ul className="nav nav-pills flex-column mb-sm-auto mt-3 pt-3 mb-0 align-items-center align-items-sm-start" id="menu">
+                {links.map((link) => (
+                  <li className="nav-item" key={link.text}>
+                    <NavLink to={link.path}>
+                      {link.text}
+                    </NavLink>
+                  </li>
+                ))}
+              </ul>
+              <hr />
+              <div className="dropdown pb-4">
+                <ul>
+                  <li>
+                    <button type="button" onClick={handleSignOut}>
+                      Sign Out
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </>
           )
             : (
               <ul className="nav nav-pills flex-column mb-sm-auto mt-3 pt-3 mb-0 align-items-center align-items-sm-start" id="menu">
@@ -44,12 +61,7 @@ const NavigationPanel = () => {
                 ))}
               </ul>
             )}
-          <hr />
-          <div className="dropdown pb-4">
-            <ul>
-              <li><a className="" href="user">Sign out</a></li>
-            </ul>
-          </div>
+
         </div>
       </div>
     </>
