@@ -9,9 +9,9 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <Home />
-        <Layout />
-        {/* Add other components */}
+        <Layout>
+          <Home />
+        </Layout>
       </div>
     </Provider>
   );
