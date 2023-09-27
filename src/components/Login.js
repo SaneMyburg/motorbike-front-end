@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
-import { createUser } from '../redux/users/userSlice';
+import { getUser } from '../redux/users/userSlice';
 
 const Signup = () => {
   const { user, error } = useSelector((state) => state.users);
@@ -13,12 +13,12 @@ const Signup = () => {
   };
 
   const handleButtonClick = () => {
-    dispatch(createUser(inputValue));
+    dispatch(getUser(inputValue));
   };
 
   return (
     <div>
-      Sign up Page
+      Log in Page
       {user || (
         <>
           <input

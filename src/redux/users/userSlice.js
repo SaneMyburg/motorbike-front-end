@@ -1,12 +1,27 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const url = 'http://127.0.0.1:4000/api/v1/users';
 export const createUser = createAsyncThunk(
   'Users/createUser',
   async (username, thunkAPI) => {
     try {
-      const resp = await axios.post(url, {
+      const resp = await axios.post('http://127.0.0.1:4000/api/v1/users', {
+        user: {
+          name: username,
+        },
+      });
+      return resp.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue('Something went wrong');
+    }
+  },
+);
+
+export const getUser = createAsyncThunk(
+  'Users/getUser',
+  async (username, thunkAPI) => {
+    try {
+      const resp = await axios.post('http://127.0.0.1:4000/api/v1/users/login', {
         user: {
           name: username,
         },
@@ -20,7 +35,6 @@ export const createUser = createAsyncThunk(
 
 const initialState = {
   detailsList: [],
-  isLoading: true,
   error: undefined,
   user: undefined,
 };
@@ -35,8 +49,22 @@ const userSlice = createSlice({
       })
       .addCase(createUser.fulfilled, (state, action) => {
         state.user = action.payload.name;
+        state.isLoading = false;
       })
       .addCase(createUser.rejected, (state, action) => {
+        state.error = action.payload;
+        state.isLoading = false;
+      })
+
+      .addCase(getUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.user = action.payload.name;
+        state.isLoading = false;
+        state.error = null;
+      })
+      .addCase(getUser.rejected, (state, action) => {
         state.error = action.payload;
         state.isLoading = false;
       });
