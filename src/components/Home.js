@@ -11,7 +11,6 @@ const Home = () => {
     dispatch(fetchMotorbikes());
   }, [dispatch]);
   const motors = useSelector((state) => state.motorbikes.motors);
-  console.log(motors);
 
   return (
     <div className="text-center w-75">

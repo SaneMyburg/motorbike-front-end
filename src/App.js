@@ -7,9 +7,7 @@ import Layout from './components/Layout';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import NotFound from './routes/NotFound';
-import Details from './components/Details.js';
-
-// import Motor from './components/Motor';
+import Details from './components/Details';
 
 function App() {
   const { user } = useSelector((state) => state.users);
@@ -20,8 +18,7 @@ function App() {
         {user ? (
           <>
             <Route index element={<Home />} />
-            {/* <Route path="motor" element={<Motor />} /> */}
-            <Route path='/motorbike/:id' element={<Details/>} />
+            <Route path="/motorbike/:id" element={<Details />} />
             <Route path="*" element={<NotFound />} />
           </>
         ) : (
