@@ -7,6 +7,8 @@ import Layout from './components/Layout';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import NotFound from './routes/NotFound';
+import Details from './components/Details.js';
+
 // import Motor from './components/Motor';
 
 function App() {
@@ -19,6 +21,7 @@ function App() {
           <>
             <Route index element={<Home />} />
             {/* <Route path="motor" element={<Motor />} /> */}
+            <Route path='/motorbike/:id' element={<Details/>} />
             <Route path="*" element={<NotFound />} />
           </>
         ) : (
