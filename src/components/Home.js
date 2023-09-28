@@ -1,27 +1,42 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMotorcycle } from '@fortawesome/free-solid-svg-icons';
 import { fetchMotorbikes } from '../redux/motorbikes/motorbikes';
-import Motor from './Motor';
 
 const Home = () => {
+  const [motorbikesData, setMotorbikesData] = useState([]);
+
+  const motors = useSelector((state) => state.motorbikes);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchMotorbikes());
   }, [dispatch]);
-  const motors = useSelector((state) => state.motorbikes);
 
+  useEffect(() => {
+    console.log('Dispatching fetchMotorbikes action...');
+    // Update the local state when motors change
+    setMotorbikesData(motors);
+    console.log('Length of motorbikesData:', motorbikesData.length)
+  }, [motors]);
+  
   return (
     <div className="text-center w-75">
       <h2 className="text-center m-4">LATEST MODELS</h2>
       <p className="text-center header-text2 m-2">Please select a model</p>
       <div className="show-motor">
-        {motors.length > 0 ? (
+        {motorbikesData.length > 0 ? (
           <div className="row">
-            {motors.map((motor) => (
-              <div className="col-md-4" key={motor.id}>
-                <Motor motor={motor} />
+            {console.log('Length of motorbikesData:', motorbikesData.length)}
+            {motorbikesData.map((motorbike) => (
+              <div className="col-md-4" key={motorbike.id}>
+                <div className="motorbike-card">
+                  <h2>{motorbike.name}</h2>
+                  <img src={motorbike.photo} alt={motorbike.name} />
+                  <p>{motorbike.description}</p>
+                  <p>Price: ${motorbike.price}</p>
+                </div>
               </div>
             ))}
           </div>
