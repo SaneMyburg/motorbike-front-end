@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
@@ -6,11 +6,20 @@ import './App.css';
 import Layout from './components/Layout';
 import Signup from './components/Signup';
 import Login from './components/Login';
-import NotFound from './routes/NotFound';
 import Details from './components/Details';
+import Reserve from './routes/Reserve';
+import MyReservations from './components/MyReservations';
 
 function App() {
   const { user } = useSelector((state) => state.users);
+
+  const [reservations, setReservations] = useState([]);
+
+  const addReservation = (reservation) => {
+    console.log("Adding reservation:", reservation); 
+    setReservations([...reservations, reservation]);
+  };
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -18,7 +27,10 @@ function App() {
           <>
             <Route index element={<Home />} />
             <Route path="/motorbike/:id" element={<Details />} />
-            <Route path="*" element={<NotFound />} />
+            <Route path="reserve/:id" element={<Reserve />} />
+            <Route path="/reserve" element={<Reserve addReservation={addReservation} />} />
+            <Route path="/myreservations" element={<MyReservations reservations={reservations} />}
+            />
           </>
         ) : (
           <>
