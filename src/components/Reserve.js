@@ -14,7 +14,9 @@ const Reserve = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle the reservation logic here
-    console.log('Reservation submitted:', { motorId, date, city, username });
+    console.log('Reservation submitted:', {
+      motorId, date, city, username,
+    });
   };
 
   return (

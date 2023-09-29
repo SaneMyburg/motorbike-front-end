@@ -11,15 +11,13 @@ const Home = () => {
   }, [dispatch]);
 
   const motors = useSelector((state) => state.motorbikes.motors);
-
+  const [motorbikesData, setMotorbikesData] = useState([]);
   useEffect(() => {
     console.log('Dispatching fetchMotorbikes action...');
     // Update the local state when motors change
     setMotorbikesData(motors);
-    console.log('Length of motorbikesData:', motorbikesData.length)
+    console.log('Length of motorbikesData:', motorbikesData.length);
   }, [motors]);
-  
-  const [motorbikesData, setMotorbikesData] = useState([]);
 
   return (
     <div className="text-center w-75">
@@ -33,9 +31,12 @@ const Home = () => {
               <div className="col-md-4" key={motorbike.id}>
                 <div className="motorbike-card">
                   <h2>{motorbike.name}</h2>
-                  <img src={motorbike.photo} alt={motorbike.name} className='motor-image' />
+                  <img src={motorbike.photo} alt={motorbike.name} className="motor-image" />
                   <p>{motorbike.description}</p>
-                  <p>Price: ${motorbike.price}</p>
+                  <p>
+                    Price: $
+                    {motorbike.price}
+                  </p>
                 </div>
               </div>
             ))}
