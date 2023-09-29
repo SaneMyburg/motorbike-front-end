@@ -1,0 +1,13 @@
+.reserve-btn {
+  background-color: rgb(138, 214, 39);
+  border-radius: 20px;
+}
+
+.back-btn {
+  background-color: rgb(138, 214, 39);
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  width: 50px;
+  padding: 10px;
+  padding-left: 30px;
+}
