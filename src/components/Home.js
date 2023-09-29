@@ -5,14 +5,12 @@ import { faMotorcycle } from '@fortawesome/free-solid-svg-icons';
 import { fetchMotorbikes } from '../redux/motorbikes/motorbikes';
 
 const Home = () => {
-  const [motorbikesData, setMotorbikesData] = useState([]);
-
-  const motors = useSelector((state) => state.motorbikes);
-
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchMotorbikes());
   }, [dispatch]);
+
+  const motors = useSelector((state) => state.motorbikes.motors);
 
   useEffect(() => {
     console.log('Dispatching fetchMotorbikes action...');
@@ -21,6 +19,8 @@ const Home = () => {
     console.log('Length of motorbikesData:', motorbikesData.length)
   }, [motors]);
   
+  const [motorbikesData, setMotorbikesData] = useState([]);
+
   return (
     <div className="text-center w-75">
       <h2 className="text-center m-4">LATEST MODELS</h2>
@@ -33,7 +33,7 @@ const Home = () => {
               <div className="col-md-4" key={motorbike.id}>
                 <div className="motorbike-card">
                   <h2>{motorbike.name}</h2>
-                  <img src={motorbike.photo} alt={motorbike.name} />
+                  <img src={motorbike.photo} alt={motorbike.name} className='motor-image' />
                   <p>{motorbike.description}</p>
                   <p>Price: ${motorbike.price}</p>
                 </div>
