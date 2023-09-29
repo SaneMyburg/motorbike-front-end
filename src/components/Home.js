@@ -9,16 +9,8 @@ const Home = () => {
   useEffect(() => {
     dispatch(fetchMotorbikes());
   }, [dispatch]);
-
+  
   const motors = useSelector((state) => state.motorbikes.motors);
-  const [motorbikesData, setMotorbikesData] = useState([]);
-  useEffect(() => {
-    console.log('Dispatching fetchMotorbikes action...');
-    // Update the local state when motors change
-    setMotorbikesData(motors);
-    console.log('Length of motorbikesData:', motorbikesData.length);
-  }, [motors]);
-
   return (
     <div className="text-center w-75">
       <h2 className="text-center m-4">LATEST MODELS</h2>
