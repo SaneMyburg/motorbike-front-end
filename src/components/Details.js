@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretLeft } from '@fortawesome/free-solid-svg-icons';
 import { fetchMotorbikes } from '../redux/motorbikes/motorbikes';
+import '../style/details.css';
 
 function Details() {
   const dispatch = useDispatch();
@@ -28,7 +31,7 @@ function Details() {
     <div className="container">
       <div className="row">
         <div className="col-8">
-          <img src={motorbike.photo} alt="motorbike" className="" style={{ width: '100%', height: '500px' }} />
+          <img src={motorbike.photo} alt="motorbike" style={{ width: '100%', height: '500px' }} />
         </div>
         <div className="col-4">
           <p>
@@ -59,10 +62,11 @@ function Details() {
             Model:
             {motorbike.created_at}
           </p>
+          <Link to="/new-resivation" className="btn reserve-btn">Book an Reservation</Link>
         </div>
       </div>
       <div className="row">
-        <Link to="/">Go to Home</Link>
+        <Link to="/" className="back-btn"><FontAwesomeIcon icon={faCaretLeft} /></Link>
       </div>
     </div>
   );
