@@ -24,7 +24,7 @@ export const fetchMotorbikesFailure = (error) => ({
 export const fetchMotorbikes = () => (dispatch) => {
   dispatch(fetchMotorbikesRequest());
   axios
-    .get('/api/v1/motorbikes')
+    .get('http://127.0.0.1:4000/api/v1/motorbikes')
     .then((response) => {
       const motorbikes = response.data;
       dispatch(fetchMotorbikesSuccess(motorbikes));
