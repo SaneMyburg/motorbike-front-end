@@ -49,7 +49,7 @@ const Reserve = ({ addReservation }) => {
         city,
         user: {
           name: username,
-          id: user.id, // Include the user's ID
+          id: user.id,
         },
         userId: user.id, // Use the user's ID
         motorbikeId: motorbike.id, // Use the motorbike's ID

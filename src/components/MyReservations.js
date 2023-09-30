@@ -35,7 +35,6 @@ const MyReservations = () => {
               {reservation.city}
               {' '}
               <br />
-
             </li>
           ))}
         </ul>
