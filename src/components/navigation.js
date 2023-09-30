@@ -6,8 +6,7 @@ import { logout } from '../redux/users/userSlice';
 const links = [
   { path: '/', text: 'Home' },
   { path: '/myreservations', text: 'My Reservations' },
-  { path: 'newpath3', text: 'ADD Motorbike' },
-  { path: 'newpath3', text: 'Delete Motorbike' },
+  { path: '/reserve', text: 'Add Reservation' },
 ];
 
 const authorizationLinks = [{ path: 'login', text: 'Log In' },

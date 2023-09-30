@@ -6,7 +6,6 @@ export const fetchReservations = createAsyncThunk(
   async ({ userId }, thunkAPI) => {
     try {
       const response = await axios.get(`http://127.0.0.1:4000/api/v1/users/${userId}`);
-      console.log('Response Data:');
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue('Something went wrong');
@@ -31,8 +30,7 @@ const reservationSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchReservations.fulfilled, (state, action) => {
-        state.reservations = action.payload.reservations;
-        console.log(action.payload);
+        state.reservations = action.payload.reservations.reverse();
         state.loading = false;
         state.error = null;
       })

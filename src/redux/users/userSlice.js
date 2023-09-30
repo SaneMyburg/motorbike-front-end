@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 export const createUser = createAsyncThunk(
   'Users/createUser',
@@ -32,11 +33,15 @@ export const getUser = createAsyncThunk(
     }
   },
 );
-
+const savedUser = Cookies.get('username');
+let jsonUser;
+if (savedUser) {
+  jsonUser = JSON.parse(savedUser);
+}
 const initialState = {
   detailsList: [],
   error: undefined,
-  user: undefined,
+  user: jsonUser,
 };
 
 const userSlice = createSlice({
@@ -44,7 +49,8 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state.user = null;
+      state.user = undefined;
+      Cookies.remove('username');
     },
   },
   extraReducers: (builder) => {
@@ -53,7 +59,8 @@ const userSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(createUser.fulfilled, (state, action) => {
-        state.user = action.payload.name;
+        state.user = action.payload;
+        Cookies.set('username', JSON.stringify(state.user));
         state.isLoading = false;
       })
       .addCase(createUser.rejected, (state, action) => {
@@ -66,6 +73,7 @@ const userSlice = createSlice({
       })
       .addCase(getUser.fulfilled, (state, action) => {
         state.user = action.payload;
+        Cookies.set('username', JSON.stringify(state.user));
         state.isLoading = false;
         state.error = null;
       })
