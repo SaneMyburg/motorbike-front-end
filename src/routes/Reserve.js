@@ -16,14 +16,13 @@ const Reserve = ({ addReservation }) => {
   const [isLoadingUser, setIsLoadingUser] = useState(true);
   const cities = ['Durban', 'Cape Town', 'Windhoek', 'Tokyo', 'Paris', 'San Francisco', 'Dublin', 'Seoul', 'Montreal'];
 
-  const motors = useSelector((state) => state.motorbikes.motors);
+  const { motors } = useSelector((state) => state.motorbikes);
   const { user } = useSelector((state) => state.users);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchMotorbikes());
-    // Fetch user data when the component mounts and track loading state
     dispatch(getUser())
       .then(() => {
         setIsLoadingUser(false);
