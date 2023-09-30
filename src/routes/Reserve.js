@@ -51,14 +51,14 @@ const Reserve = ({ addReservation }) => {
           name: username,
           id: user.id,
         },
-        userId: user.id, // Use the user's ID
-        motorbikeId: selectedMotorbike.id, // Use the motorbike's ID
+        userId: user.id,
+        motorbikeId: selectedMotorbike.id,
       };
       axios
         .post(`http://127.0.0.1:4000/api/v1/users/${user.id}/motorbikes/${selectedMotorbike.id}/reservations`, reservationData)
         .then((response) => {
           if (addReservation) {
-            addReservation(response.data); // Assuming the response contains the saved reservation
+            addReservation(response.data);
           }
         });
       navigate('/myreservations');
@@ -66,16 +66,15 @@ const Reserve = ({ addReservation }) => {
   };
 
   return (
-    <div className="reserve">
+    <div className="reserve-page">
       {isLoadingUser ? (
-        // Display loading indicator while fetching user data
-        <div className="text-center">
+        <div>
           <Spinner animation="border" />
           <p>Loading user data...</p>
         </div>
       ) : (
         <div>
-          <h2>Reserve an Appointment</h2>
+          <h2>Reserve a motorbike</h2>
           <Form onSubmit={handleSubmit}>
             <Form.Group controlId="date">
               <Form.Label>Date</Form.Label>
@@ -128,7 +127,7 @@ const Reserve = ({ addReservation }) => {
                 onChange={(e) => setUsername(e.target.value)}
               />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button style={{ margin: '1rem 0', padding: '0 2rem' }} variant="primary" type="submit">
               Reserve
             </Button>
           </Form>

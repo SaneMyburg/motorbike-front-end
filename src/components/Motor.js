@@ -1,5 +1,4 @@
 import React from 'react';
-import { Card } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 const Motor = (motor) => {
@@ -9,19 +8,16 @@ const Motor = (motor) => {
     },
   } = motor;
   return (
-    <div className="motor-card">
-      <Card style={{ width: '18rem', border: 'none' }}>
-        <Link to={`/motorbike/${id}`}>
-          <div className="motor-image-wrap">
-            <Card.Img variant="top" style={{ width: '350px', height: '200px' }} src={photo} className="motor-image" />
-          </div>
-          <Card.Body>
-            <Card.Title><p className="text-dark text-center">{name.toUpperCase()}</p></Card.Title>
-            <Card.Text><p className="text-dark text-center">{description}</p></Card.Text>
-          </Card.Body>
-        </Link>
-      </Card>
-    </div>
+    <Link to={`/motorbike/${id}`}>
+      <div className="motor-card">
+        <div>
+          <img className="card-img" src={photo} alt="Motorbike" />
+        </div>
+        <p className="card-title">{name.toUpperCase()}</p>
+        <hr className="dotted-line" />
+        <p className="card-desc">{description}</p>
+      </div>
+    </Link>
   );
 };
 

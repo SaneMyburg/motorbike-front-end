@@ -20,18 +20,17 @@ const Signup = () => {
   };
 
   return (
-    <div>
-      Sign up Page
+    <div className="auth-page">
       {user || (
         <>
           <input
             type="text"
             value={inputValue}
-            placeholder="Enter text..."
+            placeholder="Enter New Username..."
             onChange={handleInputChange}
           />
           <button type="button" onClick={handleButtonClick}>
-            Send Input
+            Sign up
           </button>
           {error}
         </>
