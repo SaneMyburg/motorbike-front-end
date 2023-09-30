@@ -14,7 +14,7 @@ function Details() {
   const motors = useSelector((state) => state.motorbikes.motors);
   const { id } = useParams();
   const motorbike = motors.find((motor) => motor.id === parseInt(id, 10));
-  // Check if a motorbike with the specified 'id' was found
+
   if (!motorbike) {
     return (
       <div>
@@ -62,7 +62,7 @@ function Details() {
             Model:
             {motorbike.created_at}
           </p>
-          <Link to="/new-resivation" className="btn reserve-btn">Book an Reservation</Link>
+          <Link to={`/reserve/${motorbike.id}`} className="btn reserve-btn">Book Reservation</Link>
         </div>
       </div>
       <div className="row">

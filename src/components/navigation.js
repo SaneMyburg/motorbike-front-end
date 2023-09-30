@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { logout } from '../redux/users/userSlice';
 
-const links = [{ path: '/', text: 'Home' },
-  { path: 'newpath2', text: 'My reservations' },
+const links = [
+  { path: '/', text: 'Home' },
+  { path: '/myreservations', text: 'My Reservations' },
   { path: 'newpath3', text: 'ADD Motorbike' },
   { path: 'newpath3', text: 'Delete Motorbike' },
 ];
