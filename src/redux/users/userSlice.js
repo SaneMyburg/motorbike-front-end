@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 export const createUser = createAsyncThunk(
   'Users/createUser',
@@ -36,7 +37,7 @@ export const getUser = createAsyncThunk(
 const initialState = {
   detailsList: [],
   error: undefined,
-  user: undefined,
+  user: Cookies.get('username') || undefined,
 };
 
 const userSlice = createSlice({
@@ -44,7 +45,8 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      state.user = null;
+      state.user = undefined;
+      Cookies.remove('username');
     },
   },
   extraReducers: (builder) => {
@@ -54,6 +56,7 @@ const userSlice = createSlice({
       })
       .addCase(createUser.fulfilled, (state, action) => {
         state.user = action.payload.name;
+        Cookies.set('username', state.user);
         state.isLoading = false;
       })
       .addCase(createUser.rejected, (state, action) => {
@@ -66,6 +69,7 @@ const userSlice = createSlice({
       })
       .addCase(getUser.fulfilled, (state, action) => {
         state.user = action.payload;
+        Cookies.set('username', state.user);
         state.isLoading = false;
         state.error = null;
       })
