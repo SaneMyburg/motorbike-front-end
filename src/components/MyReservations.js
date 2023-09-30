@@ -14,6 +14,7 @@ const MyReservations = () => {
   return (
     <div>
       <h2>My Reservations</h2>
+      addReservation
       {reservations.length === 0 ? (
         <p>No reservations found.</p>
       ) : (

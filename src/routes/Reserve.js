@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Spinner } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { fetchMotorbikes } from '../redux/motorbikes/motorbikes';
@@ -11,15 +11,14 @@ const Reserve = ({ addReservation }) => {
   const { id } = useParams();
   const [date, setDate] = useState('');
   const [city, setCity] = useState('');
+  const [motorbikeSelection, setMotorbikeSelection] = useState('');
   const [username, setUsername] = useState('');
-  const [isLoadingUser, setIsLoadingUser] = useState(true); // Track user data loading
-
+  const [isLoadingUser, setIsLoadingUser] = useState(true);
   const cities = ['Durban', 'Cape Town', 'Windhoek', 'Tokyo', 'Paris', 'San Francisco', 'Dublin', 'Seoul', 'Montreal'];
 
   const motors = useSelector((state) => state.motorbikes.motors);
-  const user = useSelector((state) => state.users.user);
-
-  const motorbike = motors.find((motor) => motor.id === parseInt(id, 10));
+  const { user } = useSelector((state) => state.users);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -28,11 +27,6 @@ const Reserve = ({ addReservation }) => {
     dispatch(getUser())
       .then(() => {
         setIsLoadingUser(false);
-
-        // Additional check: Ensure the user object contains the ID
-        if (!user || !user.id) {
-          console.error('User ID is missing in the user object.');
-        }
       })
       .catch(() => setIsLoadingUser(false));
   }, [dispatch]);
@@ -40,9 +34,16 @@ const Reserve = ({ addReservation }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Check if user data is available and contains the ID
-    if (motorbike && user && user.id) {
-      const motorName = motorbike.name;
+    if (id) {
+      const selectedMotorbike = motors.find((motor) => motor.id === parseInt(id, 10));
+      if (selectedMotorbike) {
+        setMotorbikeSelection(selectedMotorbike.name);
+      }
+    }
+    const selectedMotorbike = motors.find((motor) => motor.name === motorbikeSelection);
+
+    if (selectedMotorbike && user) {
+      const motorName = selectedMotorbike.name;
       const reservationData = {
         motorName,
         date,
@@ -52,25 +53,16 @@ const Reserve = ({ addReservation }) => {
           id: user.id,
         },
         userId: user.id, // Use the user's ID
-        motorbikeId: motorbike.id, // Use the motorbike's ID
+        motorbikeId: selectedMotorbike.id, // Use the motorbike's ID
       };
-
       axios
-        .post(`http://127.0.0.1:4000//api/v1/users/${user.id}/motorbikes/${motorbike.id}/reservations`, reservationData)
+        .post(`http://127.0.0.1:4000/api/v1/users/${user.id}/motorbikes/${selectedMotorbike.id}/reservations`, reservationData)
         .then((response) => {
-          console.log('Reservation saved:', response.data);
-          // setReservationSaved(true);
-
-          // Call a function or update state to indicate success
           if (addReservation) {
             addReservation(response.data); // Assuming the response contains the saved reservation
           }
-        })
-        .catch((error) => {
-          console.error('Error saving reservation:', error.response.data);
         });
-    } else {
-      console.error(`Motorbike with id ${id} not found or user not logged in`);
+      navigate('/myreservations');
     }
   };
 
@@ -110,6 +102,25 @@ const Reserve = ({ addReservation }) => {
                 ))}
               </Form.Select>
             </Form.Group>
+
+            {!id && (
+              <Form.Group controlId="motorbike">
+                <Form.Label>Motorbike</Form.Label>
+                <Form.Select
+                  value={motorbikeSelection}
+                  onChange={(e) => setMotorbikeSelection(e.target.value)}
+                  required
+                >
+                  <option value="">Select a motorbike</option>
+                  {motors.map((option) => (
+                    <option key={option.id} value={option.name}>
+                      {option.name}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Form.Group>
+            )}
+
             <Form.Group controlId="username">
               <Form.Label>Name</Form.Label>
               <Form.Control

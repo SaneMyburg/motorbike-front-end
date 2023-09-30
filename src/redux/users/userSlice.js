@@ -33,11 +33,15 @@ export const getUser = createAsyncThunk(
     }
   },
 );
-
+const savedUser = Cookies.get('username');
+let jsonUser;
+if (savedUser) {
+  jsonUser = JSON.parse(savedUser);
+}
 const initialState = {
   detailsList: [],
   error: undefined,
-  user: Cookies.get('username') || undefined,
+  user: jsonUser,
 };
 
 const userSlice = createSlice({
@@ -55,8 +59,8 @@ const userSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(createUser.fulfilled, (state, action) => {
-        state.user = action.payload.name;
-        Cookies.set('username', state.user);
+        state.user = action.payload;
+        Cookies.set('username', JSON.stringify(state.user));
         state.isLoading = false;
       })
       .addCase(createUser.rejected, (state, action) => {
@@ -69,7 +73,7 @@ const userSlice = createSlice({
       })
       .addCase(getUser.fulfilled, (state, action) => {
         state.user = action.payload;
-        Cookies.set('username', state.user);
+        Cookies.set('username', JSON.stringify(state.user));
         state.isLoading = false;
         state.error = null;
       })

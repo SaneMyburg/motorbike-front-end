@@ -16,7 +16,6 @@ function App() {
   const [reservations, setReservations] = useState([]);
 
   const addReservation = (reservation) => {
-    console.log('Adding reservation:', reservation);
     setReservations([...reservations, reservation]);
   };
 
