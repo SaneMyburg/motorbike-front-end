@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Button, Spinner } from 'react-bootstrap';
+import { Form, Spinner } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
@@ -66,73 +66,75 @@ const Reserve = ({ addReservation }) => {
   };
 
   return (
-    <div className="reserve-page">
-      {isLoadingUser ? (
-        <div>
-          <Spinner animation="border" />
-          <p>Loading user data...</p>
-        </div>
-      ) : (
-        <div>
-          <h2>Reserve a motorbike</h2>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group controlId="date">
-              <Form.Label>Date</Form.Label>
-              <Form.Control
-                type="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                required
-              />
-            </Form.Group>
-            <Form.Group controlId="city">
-              <Form.Label>City</Form.Label>
-              <Form.Select
-                value={city}
-                onChange={(e) => setCity(e.target.value)}
-                required
-              >
-                <option value="">Select a city</option>
-                {cities.map((cityOption) => (
-                  <option key={cityOption} value={cityOption}>
-                    {cityOption}
-                  </option>
-                ))}
-              </Form.Select>
-            </Form.Group>
-
-            {!id && (
-              <Form.Group controlId="motorbike">
-                <Form.Label>Motorbike</Form.Label>
+    <div className="reserve-container">
+      <div className="reserve-page">
+        {isLoadingUser ? (
+          <div>
+            <Spinner animation="border" />
+            <p>Loading user data...</p>
+          </div>
+        ) : (
+          <div>
+            <h2>Reserve a motorbike</h2>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group controlId="date">
+                <Form.Label>Date</Form.Label>
+                <Form.Control
+                  type="date"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+                  required
+                />
+              </Form.Group>
+              <Form.Group controlId="city">
+                <Form.Label>City</Form.Label>
                 <Form.Select
-                  value={motorbikeSelection}
-                  onChange={(e) => setMotorbikeSelection(e.target.value)}
+                  value={city}
+                  onChange={(e) => setCity(e.target.value)}
                   required
                 >
-                  <option value="">Select a motorbike</option>
-                  {motors.map((option) => (
-                    <option key={option.id} value={option.name}>
-                      {option.name}
+                  <option value="">Select a city</option>
+                  {cities.map((cityOption) => (
+                    <option key={cityOption} value={cityOption}>
+                      {cityOption}
                     </option>
                   ))}
                 </Form.Select>
               </Form.Group>
-            )}
 
-            <Form.Group controlId="username">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </Form.Group>
-            <Button style={{ margin: '1rem 0', padding: '0 2rem' }} variant="primary" type="submit">
-              Reserve
-            </Button>
-          </Form>
-        </div>
-      )}
+              {!id && (
+                <Form.Group controlId="motorbike">
+                  <Form.Label>Motorbike</Form.Label>
+                  <Form.Select
+                    value={motorbikeSelection}
+                    onChange={(e) => setMotorbikeSelection(e.target.value)}
+                    required
+                  >
+                    <option value="">Select a motorbike</option>
+                    {motors.map((option) => (
+                      <option key={option.id} value={option.name}>
+                        {option.name}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+              )}
+
+              <Form.Group controlId="username">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </Form.Group>
+              <button className="reserve-btn" type="submit">
+                Reserve
+              </button>
+            </Form>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

@@ -33,6 +33,7 @@
   --info-text-color: #aaa;
   --secondary-color: #e2e3e5;
   --main-color: #97bf0f;
+  --main-color-transparent: #96bf0fe8;
   --hover-color: #a7cf1f;
 }
 
@@ -308,6 +309,8 @@ svg {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex: 1;
+  background-color: var(--main-color-transparent);
 }
 
 .reserve-page > div {
@@ -329,4 +332,27 @@ svg {
 
 .logo {
   width: 90%;
+}
+
+.reserve-container {
+  display: flex;
+  background-image: url(./style/bg.webp);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border: solid white 10px;
+  color: white;
+}
+
+.reserve-btn {
+  color: var(--main-color) !important;
+  background-color: white !important;
+  border-radius: 2rem !important;
+  margin: 1rem 0;
+  padding: 0 2rem;
+  border: solid var(--main-color) 2px;
+}
+
+.reserve-btn:hover {
+  background-color: var(--secondary-color) !important;
 }
