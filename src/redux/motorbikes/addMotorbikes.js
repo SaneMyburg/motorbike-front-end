@@ -18,13 +18,13 @@ export const addMotorbikeFailure = (error) => ({
   payload: error,
 });
 
-export const addMotorbike = (motorbikeData) => (dispatch) => {
+export const addMotorbike = (motorbikeData, userId) => (dispatch) => {
   dispatch(addMotorbikeRequest());
   // Make a POST request to your backend API to add the motobike
-  const userId = 1;
+  const updatedMotorbikeData = { ...motorbikeData, user_id: userId };
 
   axios
-    .post(`http://127.0.0.1:4000/api/v1/users/${userId}/motorbikes`, motorbikeData)
+    .post(`http://127.0.0.1:4000/api/v1/users/${userId}/motorbikes`, updatedMotorbikeData)
     .then((response) => {
       const newMotorbike = response.data;
       dispatch(addMotorbikeSuccess(newMotorbike));

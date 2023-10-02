@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { addMotorbike } from '../redux/motorbikes/addMotorbikes';
 
-const AddMotorbikeForm = () => {
+const AddMotorbikeForm = ({ userId }) => {
   const dispatch = useDispatch();
   const [motorbikeData, setMotorbikeData] = useState({
     name: '',
@@ -24,17 +25,23 @@ const AddMotorbikeForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addMotorbike(motorbikeData));
-    // Clear the form after submission
-    setMotorbikeData({
-      name: '',
-      photo: '',
-      description: '',
-      price: 0,
-      finance_fee: 0,
-      total_amount_payable: 0,
-      duration: 0,
-    });
+
+    if (userId) {
+      dispatch(addMotorbike(motorbikeData, userId));
+      // Clear the form after submission
+      setMotorbikeData({
+        name: '',
+        photo: '',
+        description: '',
+        price: 0,
+        finance_fee: 0,
+        total_amount_payable: 0,
+        duration: 0,
+      });
+    } else {
+      /* eslint-disable no-console */
+      console.log('Invalid user ID:', userId);
+    }
   };
 
   return (
@@ -138,10 +145,14 @@ const AddMotorbikeForm = () => {
             />
           </label>
         </div>
-        <button type="submit" className="btn btn-primary">ADD MOTORBIKE</button>
+        <button type="submit" className="btn btn-green">ADD MOTORBIKE</button>
       </form>
     </div>
   );
+};
+
+AddMotorbikeForm.propTypes = {
+  userId: PropTypes.number.isRequired,
 };
 
 export default AddMotorbikeForm;
