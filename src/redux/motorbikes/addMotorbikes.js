@@ -21,8 +21,10 @@ export const addMotorbikeFailure = (error) => ({
 export const addMotorbike = (motorbikeData) => (dispatch) => {
   dispatch(addMotorbikeRequest());
   // Make a POST request to your backend API to add the motobike
+  const userId = 1;
+
   axios
-    .post('http://127.0.0.1:4000/api/v1/motorbikes', motorbikeData)
+    .post(`http://127.0.0.1:4000/api/v1/users/${userId}/motorbikes`, motorbikeData)
     .then((response) => {
       const newMotorbike = response.data;
       dispatch(addMotorbikeSuccess(newMotorbike));
