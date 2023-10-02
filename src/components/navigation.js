@@ -8,6 +8,7 @@ const links = [
   { path: '/', text: 'Home' },
   { path: '/myreservations', text: 'My Reservations' },
   { path: '/reserve', text: 'Add Reservation' },
+  { path: '/add-motorbikes', text: 'Add Motorbikes' },
 ];
 
 const authorizationLinks = [{ path: 'login', text: 'Log In' },
