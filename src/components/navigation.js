@@ -7,8 +7,9 @@ import logo from '../style/logo.png';
 const links = [
   { path: '/', text: 'Home' },
   { path: '/myreservations', text: 'My Reservations' },
-  { path: '/reserve', text: 'Add Reservation' },
+  { path: '/reserve', text: 'Reserve' },
   { path: '/add-motorbikes', text: 'Add Motorbikes' },
+  { path: 'delete-motorbikes', text: 'Delete Motorbikes' },
 ];
 
 const authorizationLinks = [{ path: 'login', text: 'Log In' },
