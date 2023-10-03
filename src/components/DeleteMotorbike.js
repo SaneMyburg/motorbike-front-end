@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import { deleteMotorbike } from '../redux/motorbikes/deleteMotorbikeSlice';
 import { fetchMotorbikes } from '../redux/motorbikes/motorbikes';
 
@@ -11,13 +11,14 @@ const DeleteMotorbike = () => {
   const loading = useSelector((state) => state.motorbikes.loading);
   const error = useSelector((state) => state.motorbikes.error);
 
-  const navigate = useNavigate(); // Initialize the useNavigate hook
+  const navigate = useNavigate();
+  const [notification, setNotification] = useState(null);
 
   const handleDelete = async (id) => {
     try {
       await dispatch(deleteMotorbike({ userId: user.id, motorbikeId: id }));
-      alert('Motorbike deleted successfully.'); // Show a notification
-      navigate('/'); // Use navigate to redirect to the home page
+      setNotification('Motorbike deleted successfully.');
+      navigate('/');
     } catch (error) {
       console.error('Error deleting motorbike:', error);
     }
@@ -27,31 +28,41 @@ const DeleteMotorbike = () => {
     dispatch(fetchMotorbikes());
   }, [dispatch]);
 
-  if (loading === 'pending') {
-    return <p>Loading...</p>;
-  }
+  let content;
 
-  if (error) {
-    return (
+  if (notification) {
+    content = <p>Motorbike deleted successfully</p>;
+  } else if (loading === 'pending') {
+    content = <p>Loading...</p>;
+  } else if (error) {
+    content = (
       <p>
         Error:
         {error}
       </p>
+    );
+  } else if (motors.length === 0) {
+    content = <p>No motorbikes found.</p>;
+  } else {
+    content = (
+      <ul>
+        {motors.map((motorbike) => (
+          <li key={motorbike.id}>
+            {motorbike.name}
+            {' '}
+            <button type="button" onClick={() => handleDelete(motorbike.id)}>
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
     );
   }
 
   return (
     <div>
       <h1>Motorbikes</h1>
-      <ul>
-        {motors.map((motorbike) => (
-          <li key={motorbike.id}>
-            {motorbike.name}
-            {' '}
-            <button type="button" onClick={() => handleDelete(motorbike.id)}>Delete</button>
-          </li>
-        ))}
-      </ul>
+      {content}
     </div>
   );
 };

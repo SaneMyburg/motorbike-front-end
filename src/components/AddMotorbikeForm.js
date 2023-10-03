@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { addMotorbike } from '../redux/motorbikes/addMotorbikes';
 
 const AddMotorbikeForm = ({ userId }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [motorbikeData, setMotorbikeData] = useState({
     name: '',
     photo: '',
@@ -38,9 +40,7 @@ const AddMotorbikeForm = ({ userId }) => {
         total_amount_payable: 0,
         duration: 0,
       });
-    } else {
-      /* eslint-disable no-console */
-      console.log('Invalid user ID:', userId);
+      navigate('/');
     }
   };
 

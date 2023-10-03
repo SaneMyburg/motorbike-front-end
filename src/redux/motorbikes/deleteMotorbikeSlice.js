@@ -4,8 +4,6 @@ import axios from 'axios';
 export const deleteMotorbike = createAsyncThunk(
   'motorbikes/deleteMotorbike',
   async ({ userId, motorbikeId }) => {
-    console.log('Deleting motorbike with ID:', motorbikeId);
-    console.log('Deleting motorbike with USER ID:', userId);
     await axios.delete(`http://127.0.0.1:4000/api/v1/users/${userId}/motorbikes/${motorbikeId}`);
     return motorbikeId;
   },

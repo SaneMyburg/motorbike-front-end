@@ -39,11 +39,17 @@ function Details() {
           <ul className="details-list">
             <li>
               <span>Price</span>
-              <span>{motorbike.price}</span>
+              <span>
+                $
+                {motorbike.price}
+              </span>
             </li>
             <li>
               <span>Finance Fee</span>
-              <span>{motorbike.finance_fee}</span>
+              <span>
+                $
+                {motorbike.finance_fee}
+              </span>
             </li>
             <li>
               <span>Model</span>
@@ -51,11 +57,17 @@ function Details() {
             </li>
             <li>
               <span>Duration</span>
-              <span>{motorbike.duration}</span>
+              <span>
+                {motorbike.duration}
+                months
+              </span>
             </li>
             <li>
               <span>Total Payable Amount</span>
-              <span>{motorbike.total_amount_payable}</span>
+              <span>
+                $
+                {motorbike.total_amount_payable}
+              </span>
             </li>
             <li>
               <span className="details-desc">
