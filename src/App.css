@@ -357,3 +357,9 @@ svg {
 .reserve-btn:hover {
   background-color: var(--secondary-color) !important;
 }
+
+@media screen and (max-width: 481px) {
+  .layout-container {
+    flex-direction: column;
+  }
+}
