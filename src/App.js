@@ -10,6 +10,7 @@ import Details from './components/Details';
 import Reserve from './routes/Reserve';
 import MyReservations from './components/MyReservations';
 import AddMotorbikeForm from './components/AddMotorbikeForm';
+import DeleteMotorbike from './components/DeleteMotorbike';
 
 function App() {
   const { user } = useSelector((state) => state.users);
@@ -34,6 +35,7 @@ function App() {
               path="/myreservations"
               element={<MyReservations reservations={reservations} />}
             />
+            <Route path="/delete-motorbikes" element={<DeleteMotorbike />} />
           </>
         ) : (
           <>
