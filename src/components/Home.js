@@ -1,9 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMotorcycle } from '@fortawesome/free-solid-svg-icons';
 import { fetchMotorbikes } from '../redux/motorbikes/motorbikes';
 import Motor from './Motor';
+import {
+  LeftArrowIcon,
+  RightArrowIcon,
+} from '../icons';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -12,22 +16,40 @@ const Home = () => {
   }, [dispatch]);
   const motors = useSelector((state) => state.motorbikes.motors);
 
+  const motorsContainerRef = useRef(null);
+
+  const scrollLeft = () => {
+    if (motorsContainerRef.current) {
+      motorsContainerRef.current.scrollLeft -= 50;
+    }
+  };
+
+  const scrollRight = () => {
+    if (motorsContainerRef.current) {
+      motorsContainerRef.current.scrollLeft += 50;
+    }
+  };
+
   return (
-    <div className="text-center w-75">
-      <h2 className="text-center m-4">LATEST MODELS</h2>
-      <p className="text-center header-text2 m-2">Please select a model</p>
-      <div className="show-motor">
+    <div className="home-container">
+      <h1>LATEST MODELS</h1>
+      <span className="info-txt">Please select a model</span>
+      <hr className="dotted-line" />
+      <div className="motors-container">
+        <button type="button" className="scroll-button left-scroll-button" onClick={scrollLeft}>
+          <LeftArrowIcon />
+        </button>
         {motors.length > 0 ? (
-          <div className="row">
+          <div className="motors-list" ref={motorsContainerRef}>
             {motors.map((motor) => (
-              <div className="col-md-4" key={motor.id}>
+              <div key={motor.id}>
                 <Motor motor={motor} />
               </div>
             ))}
           </div>
         ) : (
-          <div className="d-flex flex-column justify-content-center border mx-auto info">
-            <h2 className="w-100 text-center">
+          <div>
+            <h2>
               No motorcycle
               {' '}
               <FontAwesomeIcon icon={faMotorcycle} />
@@ -36,6 +58,9 @@ const Home = () => {
             </h2>
           </div>
         )}
+        <button type="button" className="scroll-button right-scroll-button" onClick={scrollRight}>
+          <RightArrowIcon />
+        </button>
       </div>
     </div>
   );

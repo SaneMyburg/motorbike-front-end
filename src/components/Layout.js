@@ -3,9 +3,13 @@ import React from 'react';
 import Navbar from './navigation';
 
 const Layout = () => (
-  <div style={{ display: 'flex' }}>
-    <Navbar />
-    <Outlet />
+  <div className="layout-container">
+    <nav>
+      <Navbar />
+    </nav>
+    <main>
+      <Outlet />
+    </main>
   </div>
 );
 export default Layout;

@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretLeft } from '@fortawesome/free-solid-svg-icons';
 import { fetchMotorbikes } from '../redux/motorbikes/motorbikes';
 import '../style/details.css';
+import { LeftArrowIcon } from '../icons';
 
 function Details() {
   const dispatch = useDispatch();
@@ -19,7 +18,7 @@ function Details() {
     return (
       <div>
         <h1>
-          Motorbike not found for ID:
+          No Motorbike was found for ID:
           {id}
         </h1>
         <Link to="/">Go to Home</Link>
@@ -28,45 +27,58 @@ function Details() {
   }
 
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col-8">
-          <img src={motorbike.photo} alt="motorbike" style={{ width: '100%', height: '500px' }} />
+    <div className="details-page">
+      <div className="details-container">
+        <div className="details-img-container">
+          <img src={motorbike.photo} alt="motorbike" />
         </div>
-        <div className="col-4">
-          <p>
-            Name:
+        <div className="details-list-container">
+          <p className="details-title">
             {motorbike.name}
           </p>
-          <p>
-            price:
-            {motorbike.price}
-          </p>
-          <p>
-            Description:
-            {motorbike.description}
-          </p>
-          <p>
-            Total Amount Payable:
-            {motorbike.total_amount_payable}
-          </p>
-          <p>
-            Duration:
-            {motorbike.duration}
-          </p>
-          <p>
-            Finance_Fee:
-            {motorbike.finance_fee}
-          </p>
-          <p>
-            Model:
-            {motorbike.created_at}
-          </p>
-          <Link to={`/reserve/${motorbike.id}`} className="btn reserve-btn">Book Reservation</Link>
+          <ul className="details-list">
+            <li>
+              <span>Price</span>
+              <span>{motorbike.price}</span>
+            </li>
+            <li>
+              <span>Finance Fee</span>
+              <span>{motorbike.finance_fee}</span>
+            </li>
+            <li>
+              <span>Model</span>
+              <span>{motorbike.created_at}</span>
+            </li>
+            <li>
+              <span>Duration</span>
+              <span>{motorbike.duration}</span>
+            </li>
+            <li>
+              <span>Total Payable Amount</span>
+              <span>{motorbike.total_amount_payable}</span>
+            </li>
+            <li>
+              <span className="details-desc">
+                Description:
+                {' '}
+                {motorbike.description}
+              </span>
+            </li>
+          </ul>
+
+          <Link to={`/reserve/${motorbike.id}`}>
+            <button type="button">
+              Book Reservation
+            </button>
+          </Link>
         </div>
       </div>
-      <div className="row">
-        <Link to="/" className="back-btn"><FontAwesomeIcon icon={faCaretLeft} /></Link>
+      <div className="back-btn-container">
+        <Link to="/">
+          <button type="button" className="scroll-button left-scroll-button">
+            <LeftArrowIcon />
+          </button>
+        </Link>
       </div>
     </div>
   );

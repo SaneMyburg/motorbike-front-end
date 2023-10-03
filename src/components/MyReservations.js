@@ -15,30 +15,29 @@ const MyReservations = () => {
   }, [dispatch, user.id]);
 
   return (
-    <div>
+    <div className="reservations-container">
       <h2>My Reservations</h2>
-      addReservation
       {reservations.length === 0 ? (
         <p>No reservations found.</p>
       ) : (
-        <ul>
+        <ul className="reservations-list">
           {reservations.map((reservation) => (
             <li key={reservation.motorName}>
-              <strong>Motor Name:</strong>
-              {' '}
-              {motors.find((item) => item.id === reservation.motorbike_id)?.name || 'No Match Found'}
-              {' '}
-              <br />
-              <strong>Date:</strong>
-              {' '}
-              {reservation.date}
-              {' '}
-              <br />
-              <strong>City:</strong>
-              {' '}
-              {reservation.city}
-              {' '}
-              <br />
+              <span>
+                <strong>Motor Name:</strong>
+                {' '}
+                {motors.find((item) => item.id === reservation.motorbike_id)?.name || 'No Match Found'}
+              </span>
+              <span>
+                <strong>Date:</strong>
+                {' '}
+                {reservation.date}
+              </span>
+              <span>
+                <strong>City:</strong>
+                {' '}
+                {reservation.city}
+              </span>
             </li>
           ))}
         </ul>

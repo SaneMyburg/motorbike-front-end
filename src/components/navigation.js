@@ -2,11 +2,13 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { logout } from '../redux/users/userSlice';
+import logo from '../style/logo.png';
 
 const links = [
   { path: '/', text: 'Home' },
   { path: '/myreservations', text: 'My Reservations' },
   { path: '/reserve', text: 'Add Reservation' },
+  { path: '/add-motorbikes', text: 'Add Motorbikes' },
 ];
 
 const authorizationLinks = [{ path: 'login', text: 'Log In' },
@@ -20,51 +22,45 @@ const NavigationPanel = () => {
     dispatch(logout());
   };
   return (
-
-    <>
-      <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 border-end">
-        <div className="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-          <button type="button" className="d-flex align-items-center pt-5 pb-5 mb-md-0 me-md-auto text-white text-decoration-none">
-            <span className="fs-5 d-none d-sm-inline text-black">Logo</span>
-          </button>
-          {user ? (
-            <>
-              <ul className="nav nav-pills flex-column mb-sm-auto mt-3 pt-3 mb-0 align-items-center align-items-sm-start" id="menu">
-                {links.map((link) => (
-                  <li className="nav-item" key={link.text}>
-                    <NavLink to={link.path}>
-                      {link.text}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-              <hr />
-              <div className="dropdown pb-4">
-                <ul>
-                  <li>
-                    <button type="button" onClick={handleSignOut}>
-                      Sign Out
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </>
-          )
-            : (
-              <ul className="nav nav-pills flex-column mb-sm-auto mt-3 pt-3 mb-0 align-items-center align-items-sm-start" id="menu">
-                {authorizationLinks.map((link) => (
-                  <li className="nav-item" key={link.text}>
-                    <NavLink to={link.path}>
-                      {link.text}
-                    </NavLink>
-                  </li>
-                ))}
-              </ul>
-            )}
-
-        </div>
-      </div>
-    </>
+    <div className="nav-container">
+      <section className="logo-container">
+        <NavLink to="/">
+          <img className="logo" src={logo} alt="Logo" />
+        </NavLink>
+      </section>
+      {user ? (
+        <>
+          <ul className="nav-list">
+            {links.map((link) => (
+              <li className="nav-link" key={link.text}>
+                <NavLink to={link.path}>
+                  {link.text}
+                </NavLink>
+              </li>
+            ))}
+            <li className="nav-link">
+              <button className="signout-btn" type="button" onClick={handleSignOut}>
+                Sign Out
+              </button>
+            </li>
+          </ul>
+        </>
+      )
+        : (
+          <ul className="nav-list">
+            {authorizationLinks.map((link) => (
+              <li className="nav-link" key={link.text}>
+                <NavLink to={link.path}>
+                  {link.text}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        )}
+      <footer>
+        <span>2023 all rights reserved</span>
+      </footer>
+    </div>
   );
 };
 

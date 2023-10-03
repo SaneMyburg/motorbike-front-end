@@ -9,6 +9,7 @@ import Login from './components/Login';
 import Details from './components/Details';
 import Reserve from './routes/Reserve';
 import MyReservations from './components/MyReservations';
+import AddMotorbikeForm from './components/AddMotorbikeForm';
 
 function App() {
   const { user } = useSelector((state) => state.users);
@@ -28,6 +29,7 @@ function App() {
             <Route path="/motorbike/:id" element={<Details />} />
             <Route path="reserve/:id" element={<Reserve />} />
             <Route path="/reserve" element={<Reserve addReservation={addReservation} />} />
+            <Route path="/add-motorbikes" element={<AddMotorbikeForm userId={user.id} />} />
             <Route
               path="/myreservations"
               element={<MyReservations reservations={reservations} />}
