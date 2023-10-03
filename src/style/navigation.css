@@ -1,0 +1,12 @@
+.hidden, footer{
+  display: none;
+}
+@media screen and (min-width: 481px) {
+  .hidden, footer{
+    display: block;
+  }
+  .btn-button{
+    display: none;
+  }
+ 
+}
