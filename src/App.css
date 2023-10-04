@@ -411,4 +411,16 @@ svg {
   .details-list > li {
     align-self: center;
   }
+
+  .scroll-button {
+    display: none;
+  }
+
+  .motors-list {
+    display: block;
+  }
+
+  .reservations-container {
+    padding: 1rem 2rem;
+  }
 }
