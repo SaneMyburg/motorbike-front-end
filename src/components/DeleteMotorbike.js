@@ -45,12 +45,13 @@ const DeleteMotorbike = () => {
     content = <p>No motorbikes found.</p>;
   } else {
     content = (
-      <ul>
+      <ul className="reservations-list">
         {motors.map((motorbike) => (
           <li key={motorbike.id}>
-            {motorbike.name}
-            {' '}
-            <button type="button" onClick={() => handleDelete(motorbike.id)}>
+            <span>
+              {motorbike.name}
+            </span>
+            <button className="del-btn" type="button" onClick={() => handleDelete(motorbike.id)}>
               Delete
             </button>
           </li>
@@ -60,7 +61,7 @@ const DeleteMotorbike = () => {
   }
 
   return (
-    <div>
+    <div className="reservations-container">
       <h1>Motorbikes</h1>
       {content}
     </div>
