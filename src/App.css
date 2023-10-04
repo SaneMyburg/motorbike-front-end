@@ -381,5 +381,66 @@ svg {
 @media screen and (max-width: 481px) {
   .layout-container {
     flex-direction: column;
+    padding: 0;
+    text-align: center;
+  }
+
+  .btn-button {
+    background-color: white;
+    border: none;
+    color: blue;
+    height: 2rem;
+    border-radius: 0;
+    margin-top: 5%;
+    text-align: left;
+    font-family: Gabarito-Bold, 'Arial Narrow Bold', sans-serif;
+    padding: 0 2rem;
+    font-size: 30px;
+  }
+
+  .btn-button:hover {
+    background-color: white;
+  }
+
+  .nav-link > * {
+    text-align: center;
+  }
+
+  .auth-page {
+    padding: 1rem;
+    padding-top: 10rem;
+  }
+
+  main {
+    display: inline;
+    overflow: visible;
+  }
+
+  .details-page,
+  .details-container {
+    display: inline;
+  }
+
+  .details-img-container {
+    padding: 10% 0;
+    text-align: center;
+    height: 350px;
+  }
+
+  .details-title,
+  .details-list > li {
+    align-self: center;
+  }
+
+  .scroll-button {
+    display: none;
+  }
+
+  .motors-list {
+    display: block;
+  }
+
+  .reservations-container {
+    padding: 1rem 2rem;
   }
 }
