@@ -358,6 +358,14 @@ svg {
   background-color: var(--secondary-color) !important;
 }
 
+.form-label{
+  display: flex;
+}
+
+.form-label > *{
+  flex: 1;
+}
+
 @media screen and (max-width: 481px) {
   .layout-container {
     flex-direction: column;
