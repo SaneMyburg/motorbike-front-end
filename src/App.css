@@ -94,6 +94,10 @@ nav {
   background-color: inherit;
 }
 
+.form-label > * {
+  flex: 1;
+}
+
 .nav-link > *:hover {
   background-color: var(--secondary-color);
 }
@@ -356,6 +360,22 @@ svg {
 
 .reserve-btn:hover {
   background-color: var(--secondary-color) !important;
+}
+
+.form-label {
+  display: flex;
+}
+
+.del-btn {
+  background: none;
+  border: none;
+  color: var(--text-color);
+}
+
+.del-btn:hover {
+  background: none;
+  border: none;
+  color: red;
 }
 
 @media screen and (max-width: 481px) {
