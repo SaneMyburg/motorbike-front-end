@@ -12,7 +12,7 @@ import MyReservations from './components/MyReservations';
 import AddMotorbikeForm from './components/AddMotorbikeForm';
 import DeleteMotorbike from './components/DeleteMotorbike';
 
-function App() {
+const App = () => {
   const { user } = useSelector((state) => state.users);
 
   const [reservations, setReservations] = useState([]);
@@ -47,6 +47,6 @@ function App() {
       </Route>
     </Routes>
   );
-}
+};
 
 export default App;

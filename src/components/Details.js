@@ -5,7 +5,7 @@ import { fetchMotorbikes } from '../redux/motorbikes/motorbikes';
 import '../style/details.css';
 import { LeftArrowIcon } from '../icons';
 
-function Details() {
+const Details = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchMotorbikes());
@@ -94,6 +94,6 @@ function Details() {
       </div>
     </div>
   );
-}
+};
 
 export default Details;

@@ -39,10 +39,10 @@ const Reserve = ({ addReservation }) => {
         setMotorbikeSelection(selectedMotorbike.name);
       }
     }
-    const selectedMotorbike = motors.find((motor) => motor.name === motorbikeSelection);
+    const selectedMotorbike1 = motors.find((motor) => motor.name === motorbikeSelection);
 
-    if (selectedMotorbike && user) {
-      const motorName = selectedMotorbike.name;
+    if (selectedMotorbike1 && user) {
+      const motorName = selectedMotorbike1.name;
       const reservationData = {
         motorName,
         date,
@@ -52,10 +52,10 @@ const Reserve = ({ addReservation }) => {
           id: user.id,
         },
         userId: user.id,
-        motorbikeId: selectedMotorbike.id,
+        motorbikeId: selectedMotorbike1.id,
       };
       axios
-        .post(`http://127.0.0.1:4000/api/v1/users/${user.id}/motorbikes/${selectedMotorbike.id}/reservations`, reservationData)
+        .post(`http://127.0.0.1:4000/api/v1/users/${user.id}/motorbikes/${selectedMotorbike1.id}/reservations`, reservationData)
         .then((response) => {
           if (addReservation) {
             addReservation(response.data);
@@ -101,25 +101,21 @@ const Reserve = ({ addReservation }) => {
                   ))}
                 </Form.Select>
               </Form.Group>
-
-              {!id && (
-                <Form.Group controlId="motorbike">
-                  <Form.Label>Motorbike</Form.Label>
-                  <Form.Select
-                    value={motorbikeSelection}
-                    onChange={(e) => setMotorbikeSelection(e.target.value)}
-                    required
-                  >
-                    <option value="">Select a motorbike</option>
-                    {motors.map((option) => (
-                      <option key={option.id} value={option.name}>
-                        {option.name}
-                      </option>
-                    ))}
-                  </Form.Select>
-                </Form.Group>
-              )}
-
+              <Form.Group controlId="motorbike">
+                <Form.Label>Motorbike</Form.Label>
+                <Form.Select
+                  value={motorbikeSelection}
+                  onChange={(e) => setMotorbikeSelection(e.target.value)}
+                  required
+                >
+                  <option value="">Select a motorbike</option>
+                  {motors.map((option) => (
+                    <option key={option.id} value={option.name}>
+                      {option.name}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Form.Group>
               <Form.Group controlId="username">
                 <Form.Label>Name</Form.Label>
                 <Form.Control
