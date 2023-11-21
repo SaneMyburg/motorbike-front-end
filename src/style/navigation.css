@@ -9,6 +9,11 @@ footer {
     display: block;
   }
 
+  footer {
+    position: absolute;
+    top: 90%;
+  }
+
   .btn-button {
     display: none;
   }
